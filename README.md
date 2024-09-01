@@ -1,0 +1,1 @@
+A real-world online food ordering system, allowing users to manage restaurants, dishes, and orders through various design patterns to ensure scalability and maintainability. Using Java, this system showcases the principles of Object-Oriented Programming alongside modern software design patterns such as Singleton, Factory.
