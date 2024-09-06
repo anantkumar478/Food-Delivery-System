@@ -25,16 +25,4 @@ public class Customer {
             System.out.println("Restaurant " + restaurantName + " not found");
         }
     }
-
-    public void askForMenu(String restaurantName) {
-        RestaurantManager manager = new RestaurantManager();
-        Restaurant restaurant = manager.getRestaurant(restaurantName);
-        if (restaurant != null) {
-            System.out.println("Menu for " + restaurantName + ":");
-            restaurant.displayMenu();
-        } else {
-            System.out.println("Restaurant named " + restaurantName + " does not exist.");
-        }
-    }
 }
-

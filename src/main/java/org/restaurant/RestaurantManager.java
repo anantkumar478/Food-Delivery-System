@@ -4,11 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RestaurantManager {
+    private static volatile RestaurantManager instance;
     private Map<String, Restaurant> restaurants;
 
-    // Constructor to initialize the restaurant map
-    public RestaurantManager() {
+    private RestaurantManager() {
         restaurants = new HashMap<>();
+    }
+
+    // here we have used double-checked locking to minimize synchronization overhead
+    public static RestaurantManager getInstance() {
+        if (instance == null) {
+            synchronized (RestaurantManager.class) {
+                if (instance == null) {
+                    instance = new RestaurantManager();
+                }
+            }
+        }
+        return instance;
     }
 
     public void addRestaurant(Restaurant restaurant) {
@@ -25,23 +37,14 @@ public class RestaurantManager {
         }
     }
 
-    public void addNewDishToRestaurant(String restaurantName, Dish dish) {
-        Restaurant restaurant = restaurants.get(restaurantName);
-        if (restaurant != null) {
-            restaurant.addDish(dish);
-            System.out.println("Added " + dish.getName() + " to " + restaurantName);
-        } else {
-            System.out.println("Restaurant named " + restaurantName + " does not exist.");
-        }
-    }
-
     public void removeRestaurant(String name) {
         restaurants.remove(name);
     }
 
     public void updateRestaurant(String oldName, Restaurant newRestaurant) {
         if (restaurants.containsKey(oldName)) {
-            restaurants.put(oldName, newRestaurant);  // Replaces the restaurant instance under the existing name
+            restaurants.put(oldName, newRestaurant);
         }
     }
 }
+

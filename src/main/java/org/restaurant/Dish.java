@@ -20,5 +20,3 @@ public abstract class Dish {
     public abstract void displayDish();
 }
 
-
-

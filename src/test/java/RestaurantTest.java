@@ -6,7 +6,6 @@ import org.restaurant.Restaurant;
 import org.restaurant.RestaurantManager;
 
 public class RestaurantTest {
-
     @Test
     public void testAddDish() {
         Restaurant restaurant = new Restaurant("Pasta Palace");
@@ -23,8 +22,15 @@ public class RestaurantTest {
     }
 
     @Test
+    public void testSingletonInstance() {
+        RestaurantManager instance1 = RestaurantManager.getInstance();
+        RestaurantManager instance2 = RestaurantManager.getInstance();
+        assertSame("Both instances should be the same", instance1, instance2);
+    }
+
+    @Test
     public void testAddAndGetRestaurant() {
-        RestaurantManager manager = new RestaurantManager();  // Changed to direct instantiation
+        RestaurantManager manager = RestaurantManager.getInstance();
         Restaurant restaurant = new Restaurant("Grill House");
         manager.addRestaurant(restaurant);
 
@@ -34,7 +40,7 @@ public class RestaurantTest {
 
     @Test
     public void testDisplayAllMenus() {
-        RestaurantManager manager = new RestaurantManager();  // Changed to direct instantiation
+        RestaurantManager manager = RestaurantManager.getInstance();
         Restaurant italianRestaurant = new Restaurant("Italian Bistro");
         Restaurant chineseRestaurant = new Restaurant("Chinese Corner");
 
@@ -42,12 +48,11 @@ public class RestaurantTest {
         manager.addRestaurant(chineseRestaurant);
 
         manager.displayAllMenus();
-        // In this test, we assume displayMenu() prints the menus. Normally, you'd capture console output or mock the display behavior.
     }
 
     @Test
     public void testRemoveRestaurant() {
-        RestaurantManager manager = new RestaurantManager();  // Changed to direct instantiation
+        RestaurantManager manager = RestaurantManager.getInstance();
         Restaurant testRestaurant = new Restaurant("Test Diner");
         manager.addRestaurant(testRestaurant);
 
@@ -58,7 +63,7 @@ public class RestaurantTest {
 
     @Test
     public void testUpdateRestaurant() {
-        RestaurantManager manager = new RestaurantManager();  // Changed to direct instantiation
+        RestaurantManager manager = RestaurantManager.getInstance();
         Restaurant oldRestaurant = new Restaurant("Diner");
         manager.addRestaurant(oldRestaurant);
 
