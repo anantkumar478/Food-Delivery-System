@@ -2,7 +2,8 @@ package org.restaurant;
 
 public class FoodDeliverySystem {
     public static void main(String[] args) {
-        RestaurantManager manager = RestaurantManager.getInstance();
+        RestaurantManager manager = new RestaurantManager();
+        Restaurant italianRestaurant = new Restaurant("Italian Bistro");
 
         // Create Restaurants
         manager.addRestaurant(new Restaurant("Pasta Palace"));
@@ -21,8 +22,33 @@ public class FoodDeliverySystem {
 
         // Customer Interactions
         Customer customer = new Customer("Alice");
+        customer.askForMenu("Italian Bistro");
         customer.viewMenus(manager);
         customer.orderDishFromRestaurant(manager, "Great Wall", "Chow Mein");
         customer.orderDishFromRestaurant(manager, "Burgers Bonanza", "Fish Burger");  // Dish not available
+
+
+        // Manager adding restaurant to system
+        manager.addRestaurant(italianRestaurant);
+
+        // Manager adds dishes
+        Dish spaghetti = new Dish("Spaghetti", 12) {
+            @Override
+            public void displayDish() {
+            }
+        };
+        manager.addNewDishToRestaurant("Italian Bistro", spaghetti);
+
+        // Adding another dish
+        Dish lasagna = new Dish("Lasagna", 15) {
+            @Override
+            public void displayDish() {
+
+            }
+        };
+        manager.addNewDishToRestaurant("Italian Bistro", lasagna);
+
+        // Customer asking for updated menu
+        customer.askForMenu("Italian Bistro");
     }
 }

@@ -10,3 +10,4 @@ public class AmericanDish extends Dish {
         System.out.println("American Dish: " + name + ", Price: " + price);
     }
 }
+
